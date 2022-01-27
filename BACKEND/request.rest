@@ -1,0 +1,95 @@
+GET http://localhost:5000/product
+
+###
+GET http://localhost:5000/product/5
+
+
+###
+POST http://localhost:5000/product
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "title": "Product 4", 
+    "price": "30000"
+}
+
+###
+PATCH  http://localhost:5000/product/5
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "title": "Product 5", 
+    "price": "500004"
+}
+
+###user
+GET http://localhost:5000/user
+
+###
+POST http://localhost:5000/user
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "username" : "yusmira",
+    "fullName" : "Yusmira Kartika",
+    "password" : "Yusmira123",
+    "address" : "Gianyar",
+    "phone" : "082235265401"
+}
+
+###update user
+PATCH http://localhost:5000/user
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "username" : "yusmira",
+    "fullName" : "Yusmira Kartika",
+    "password" : "Yusmira123",
+    "address" : "Gianyar1",
+    "phone" : "082235265401"
+}
+
+
+###batas login 
+
+
+###position 
+GET http://localhost:5000/position
+
+###getbyid
+GET http://localhost:5000/position/1
+
+
+###creaet position
+POST http://localhost:5000/position
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "name": "Manager"
+}
+
+###update
+PATCH  http://localhost:5000/position/1
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "name": "CEO ", 
+    "isDelete": 0
+}
+
+
+###is_delete
+PATCH  http://localhost:5000/position/delete/1
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+
+
+### POSITION
+

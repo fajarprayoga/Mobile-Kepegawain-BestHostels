@@ -1,0 +1,29 @@
+MEMBUAT APLIKASI BACKEND DENGAN NODE JS 
+
+1 install package json => npm init -y
+2. install depedensi dari express, mysql2, sequelize, cors
+    => npm install express mysql2 sequelize cors
+3. install nodemon yang berguna merestart server nya secara otomatis ketika ada perubahan pada file
+    => npm install --save-dev nodemon
+4. pada package.json di bawah main : index.js tambahkan agar bisa menggunakan iesic, syntax, import, export
+    => "type" : "module"
+5. buat file nama dengan sesuai "main" : "index.js"
+    => index.js
+6. import exprss di index.js   
+    => import express from "express";
+        => atau lihat index-exmaple contoh
+
+
+
+
+
+
+
+
+
+
+
+react native lincence
+https://stackoverflow.com/questions/63543529/please-accept-all-necessary-android-sdk-licenses
+
+ 
