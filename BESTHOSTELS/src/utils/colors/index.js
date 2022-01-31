@@ -1,4 +1,5 @@
 const mainColors = {
+    base : '#f3722c',
     blue: '#0d6efd',
     grey: '#6c757d',
     green: '#198754',
@@ -19,5 +20,6 @@ export const colors = {
     danger: mainColors.red,
     light: mainColors.light,
     dark: mainColors.dark,
-    LoadingBackground : mainColors.bgBlack
+    LoadingBackground : mainColors.bgBlack, 
+    base : mainColors.base
 }

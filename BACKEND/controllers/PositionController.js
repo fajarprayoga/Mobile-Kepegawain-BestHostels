@@ -6,7 +6,11 @@ import Position from '../models/PositionModel.js';
 export const getAllPosition = async(req, res) => {
 
     try {
-        const position = await Position.findAll();
+        const position = await Position.findAll({
+            where: {
+                isDelete:  0
+            }
+        });
         res.json(position);
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {
@@ -36,8 +40,14 @@ export const createPosition = async(req, res) => {
 
     try {
         await Position.create(req.body);
+        const position = await Position.findAll({
+            where: {
+                isDelete:  0
+            }
+        });
         res.json({
-            'message' : 'Product created'
+            'message' : 'Product created',
+            'position' : position
         });
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {
@@ -54,8 +64,14 @@ export const updatePosition = async(req, res) => {
                 id: req.params.id
             }
         });
+        const position = await Position.findAll({
+            where: {
+                isDelete:  0
+            }
+        });
         res.json({
-            'message' : 'Position Updated'
+            'message' : 'Position Updated',
+            'position' : position
         });
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {
@@ -73,8 +89,14 @@ export const deletePosition = async(req, res) => {
                 id: req.params.id
             }
         });
+        const position = await Position.findAll({
+            where: {
+                isDelete:  0
+            }
+        });
         res.json({
-            'message' : 'Position Dihapus'
+            'message' : 'Position Dihapus',
+            'position' : position
         });
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {

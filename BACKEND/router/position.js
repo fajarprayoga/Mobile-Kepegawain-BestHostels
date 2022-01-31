@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/',getAllPosition );
 router.get('/:id',getPositionById );
 router.post('/',createPosition );
-router.patch('/:id',updatePosition );
-router.patch('/delete/:id',deletePosition );
+router.put('/:id',updatePosition );
+router.put('/delete/:id',deletePosition );
 
 export default router;

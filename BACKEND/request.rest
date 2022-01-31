@@ -40,8 +40,18 @@ Content-Type: application/json
     "phone" : "082235265401"
 }
 
+###LOGON
+POST http://localhost:5000/user/login
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "username" : "yusmira",
+    "password" : "Yusmira123"
+}
+
 ###update user
-PATCH http://localhost:5000/user
+PATCH http://localhost:5000/user/update/6
 Content-Type: application/json
 
 # tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
@@ -49,8 +59,9 @@ Content-Type: application/json
     "username" : "yusmira",
     "fullName" : "Yusmira Kartika",
     "password" : "Yusmira123",
-    "address" : "Gianyar1",
-    "phone" : "082235265401"
+    "address" : "Gianyar",
+    "phone" : "082235265401",
+    "salary" : 1500000
 }
 
 
@@ -74,7 +85,7 @@ Content-Type: application/json
 }
 
 ###update
-PATCH  http://localhost:5000/position/1
+PUT  http://localhost:5000/position/1
 Content-Type: application/json
 
 # tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
@@ -85,7 +96,7 @@ Content-Type: application/json
 
 
 ###is_delete
-PATCH  http://localhost:5000/position/delete/1
+PUT  http://localhost:5000/position/delete/1
 Content-Type: application/json
 
 # tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
@@ -93,3 +104,54 @@ Content-Type: application/json
 
 ### POSITION
 
+
+
+### ABSENT
+###GET 
+GET http://localhost:5000/absent
+
+
+###
+POST http://localhost:5000/absent
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "userId": 6,
+    "status" : "sick"
+}
+
+###
+PATCH http://localhost:5000/absent/33
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "status" : "present"
+}
+
+###batasa absent
+
+### LEAVE
+GET http://localhost:5000/leave
+
+### POST LEAVE
+POST http://localhost:5000/leave
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "userId": 1,
+    "fromDate": "2022-01-27",
+    "untilDate": "2022-01-30",
+    "description": "Saya ingin liburan sebentar 3 hr"
+}
+
+###update leve
+PATCH http://localhost:5000/leave/8
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "status" : "approved"
+}

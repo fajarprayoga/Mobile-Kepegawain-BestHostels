@@ -1,40 +1,44 @@
 import { Button, Input, Text } from '@ui-kitten/components';
 import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
-import { showMessage } from 'react-native-flash-message';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Gap } from '../../component';
-import { useForm } from '../../utils';
+import { SET_LOADING, SET_USER } from '../../redux/action';
 import API from '../../services';
-import Config from 'react-native-config';
-import Axios from 'axios';
+import { Message, useForm } from '../../utils';
+
+
 const Login = ({navigation}) => {
+  const stateGlobal = useSelector(state => state.LOADING);
   const dispatch = useDispatch(); 
-  const [form, setForm] = useForm({
+  const [login, setLogin] = useForm({
     username : '',
     password : ''
   })
 
-  // cara merubah state global
-  const showLoadingTemp = () => {
-    dispatch({type:'SET_LOADING', value : true})
-  }
   
   const actionLogin = () => {
-    // console.log(form);
-    // showMessage({
-    //   message: "Simple message",
-    //   type: "info",
-    // });
-
-    fetch('http://192.168.1.5:5000/product')
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch((error) => {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
-      throw error;
-    })
-
+    console.log('login',login);
+      if(login.username != '' && login.password !=''){
+        dispatch(SET_LOADING(true))
+        API.login(login).then(res => {
+            // console.log(res);
+            if(res.code == 200){
+              setLogin('reset');
+              dispatch(SET_USER(res.user));
+              navigation.replace('Home');
+            }else{
+              Message('warning',res.message);
+            }
+        }).catch(err => {
+          Message('danger',err );
+          console.log(err);
+        }).finally(fin => {
+              dispatch(SET_LOADING(false))
+        })
+      }else{
+        Message('danger','Username dan password harus diisi' );
+      }
   }
 
   const actionSignup = () => {
@@ -49,14 +53,15 @@ const Login = ({navigation}) => {
         <Gap height={20} />
         <Input
           placeholder='Masukan Username Anda'
-          value={form.username}
-          onChangeText={value => setForm('username',value)}
+          value={login.username}
+          onChangeText={value => setLogin('username',value)}
         />
         <Gap height={20} />
         <Input
           placeholder='Masukan Password Anda'
-          value={form.username}
-          onChangeText={value => setForm('password',value)}
+          value={login.password}
+          secureTextEntry={true}
+          onChangeText={value => setLogin('password',value)}
         />
         <Gap height={20} />
         <Button style={styles.button} status='primary' onPress={actionLogin} >

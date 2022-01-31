@@ -1,69 +1,61 @@
-import { StyleSheet, ImageBackground, View, TouchableWithoutFeedback } from 'react-native';
-import React, {useState} from 'react';
-import { Layout, Input, Button, Icon, Text, Autocomplete, AutocompleteItem } from '@ui-kitten/components';
-import { useForm } from '../../utils';
+import { Button, Input, Text } from '@ui-kitten/components';
+import React, { useEffect, useState } from 'react';
+import { ImageBackground, StyleSheet, View } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+import { useDispatch } from 'react-redux';
 import { Gap } from '../../component';
-
+import { SET_LOADING } from '../../redux/action';
+import API from '../../services';
+import { Message, useForm } from '../../utils';
 const Signup = () => {
-
+    const dispatch = useDispatch();
      // logic
-     const [form, setForm] = useForm({
+     const [signUp, setSignUp] = useForm({
         username : '',
-        password : ''
-    })
-
+        fullName : '',
+        password : '',
+        phone : '',
+        address : '',
+    });
+    const [position, setPosition] = useState(null);
     const actionLogin = () => {
-        console.log(form);
+        console.log(signUp);
     }
+
 
     const actionSignup = () => {
-        navigation.navigate('Signup')
+        // console.log(signUp);
+        if(signUp.username !='' && signUp.password !='' && signUp.fullName !='' && signUp.phone !=''){
+            // console.log(signUp);
+            dispatch(SET_LOADING(true))
+            API.signUp(signUp).then((res) => {
+                console.log(res);
+                Message('success', res.message)
+                setSignUp('reset')
+            }).catch(err => {
+                Message(err)
+            }).finally(f => {
+                dispatch(SET_LOADING(false))
+            })
+        }else{
+            Message('warning', 'Mohon isi data dengan lengkap')
+            
+        }
     }
 
-
-    // AutoComplate
-    const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
-
-    const StarIcon = (props) => (
-    <Icon {...props} name='star'/>
-    );
-    const movies = [
-        { title: 'Star Wars' },
-        { title: 'Back to the Future' },
-        { title: 'The Matrix' },
-        { title: 'Inception' },
-        { title: 'Interstellar' },
-    ];
-    const [value, setValue] = React.useState(null);
-    const [data, setData] = React.useState(movies);
-  
-    const onSelect = (index) => {
-      setValue(data[index].title);
-    };
-  
-    const onChangeText = (query) => {
-      setValue(query);
-      setData(movies.filter(item => filter(item, query)));
-    };
-  
-    const clearInput = () => {
-      setValue('');
-      setData(movies);
-    };
-  
-    const renderOption = (item, index) => (
-      <AutocompleteItem
-        key={index}
-        title={item.title}
-        accessoryLeft={StarIcon}
-      />
-    );
-  
-    const renderCloseIcon = (props) => (
-      <TouchableWithoutFeedback onPress={clearInput}>
-        <Icon {...props} name='close'/>
-      </TouchableWithoutFeedback>
-    );
+    useEffect(() => {
+        dispatch(SET_LOADING(true))
+        const unsubscribe = API.position().then(res => {
+            console.log(res[0].name);
+            setPosition(res)
+        }).catch(err => {
+            console.log(err);
+            Message('danger',err)
+        }).finally(f => {
+            dispatch(SET_LOADING(false))
+        })
+        // return () => unsubscribe();
+    },[])
 
     // VIew 
     return (
@@ -74,40 +66,55 @@ const Signup = () => {
             <Gap height={20} />
             <Input
                 placeholder='Masukan Username Anda'
-                value={form.username}
-                onChangeText={value => setForm('username',value)}
+                value={signUp.username}
+                onChangeText={value => setSignUp('username',value)}
             />
             <Gap height={20} />
         
             <Input
                 placeholder='Masukan Nama Anda'
-                value={form.name}
-                onChangeText={value => setForm('name',value)}
+                value={signUp.fullName}
+                onChangeText={value => setSignUp('fullName',value)}
             />
             <Gap height={20} />
 
             <Input
                 placeholder='Masukan Password'
-                value={form.username}
-                onChangeText={value => setForm('password',value)}
+                value={signUp.password}
+                secureTextEntry={true}
+                onChangeText={value => setSignUp('password',value)}
             />
             <Gap height={20} />
 
             <Input
                 placeholder='Masukan No Handphone'
-                value={form.username}
-                onChangeText={value => setForm('username',value)}
+                value={signUp.phone}
+                onChangeText={value => setSignUp('phone',value)}
+                keyboardType="phone-pad"
             />
             <Gap height={20} />
+            <Input
+                multiline={true}
+                textStyle={{ minHeight: 64 }}
+                placeholder='ALamat Anda'
+                value={signUp.address}
+                onChangeText={value => setSignUp('address', value)}
+            />
+            {/* <Picker
+                style={{backgroundColor:'white', }}
 
-            <Autocomplete
-                placeholder='Jabatan'
-                value={value}
-                accessoryRight={renderCloseIcon}
-                onChangeText={onChangeText}
-                onSelect={onSelect}>
-                {data.map(renderOption)}
-            </Autocomplete>
+                selectedValue={signUp.position}
+                mode='dropdown'
+                onValueChange={(itemValue) =>
+                    setSignUp({position : itemValue})
+                }>
+                <Picker.Item label='Pilih Jabatan' value={null} />
+                {position && position.map((item) => {
+                    return (
+                        <Picker.Item label={item.name} value={item.id} />
+                    )
+                })}
+            </Picker> */}
             <Gap height={20} />
             
             <Button style={styles.button} status='primary' onPress={actionSignup}>

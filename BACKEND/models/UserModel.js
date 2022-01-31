@@ -36,6 +36,6 @@ const User = db.define('users', {
 
 // default Penulisan relasi (positionId)
 User.belongsTo(Position);
-
+// User.hasMany(Absent);
 
 export default User;

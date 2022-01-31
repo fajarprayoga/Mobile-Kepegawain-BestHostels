@@ -1,20 +1,26 @@
-import {createStore} from 'redux';
+import {createStore,combineReducers} from 'redux';
 
-const initialState = {
-    loading : false,
-    name : 'Fajar',
-    address : 'Mengwi'
-}
+const loading = false;
 
-const reducer = (state =  initialState, action ) => {
+const LOADING = (state =  loading, action ) => {
     if(action.type == 'SET_LOADING'){
-        return {
-            ...state,
-            loading : action.value
-        }
+        return action.value;
     }
     return state;
 }
+
+
+const USER = (state = {}, action) => {
+    if(action.type == 'SET_USER'){
+        return action.value
+    }
+    return state;
+}
+
+const reducer = combineReducers({
+    LOADING,
+    USER
+})
 
 const store = createStore(reducer);
 

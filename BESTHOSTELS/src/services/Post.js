@@ -7,10 +7,10 @@ const Post = (path, root = false, data, token = null) => {
             axios.post(`${root ? OnlineRoot : RootPath}${path}`, data,
                   {
                         headers : {
-                              Authorization: (token ==null ? null : `Bearer ${token}`),
+                              // Authorization: (token ==null ? null : `Bearer ${token}`),
                               'Accept' : 'application/json',
                               'Access-Control-Allow-Origin': '*',
-                              'Access-Control-Allow-Methods': 'POST, GET, PUT,PATCH,DELETE,OPTIONS',
+                              // 'Access-Control-Allow-Methods': 'POST, GET, PUT,PATCH,DELETE,OPTIONS',
                               'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                               // 'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>'             
                         }

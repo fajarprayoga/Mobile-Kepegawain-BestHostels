@@ -72,13 +72,21 @@ export const login = async(req, res) => {
         }
 
         // response
-        res.json({
-            message : message,
-            user : verified ? user : null
-        });
+        if(verified){
+            res.json({
+                code : 200,
+                message : message,
+                user : user
+            });
+        }else{
+            res.json({
+                code : 406,
+                message : message,
+            });
+        }
 
     } catch (error) {
-        res.json({massage : error.message})
+        res.json({code : 404,massage : error.message})
     }
 
     // res.json(req.body.username);
@@ -90,7 +98,8 @@ export const updateUser = async(req, res) => {
     try {
 
         var message ='';
-
+        const passwordHash = bcrypt.hashSync(req.body.password, 10);
+        req.body.password = passwordHash;
         // get data user dengan usernme sama
         const checkUsername = await User.findOne({
             where: {
@@ -98,16 +107,21 @@ export const updateUser = async(req, res) => {
             }
         });
 
-        const user = await User.findOne({
+        var user = await User.findOne({
             where: {
-                id:  req.body.id
+                id:  req.params.id
             }
         });
 
         if(checkUsername == null || user.username == req.body.username){
-            const user = await User.update(req.body, {
+            var data  = await User.update(req.body, {
                 where: {
                     id: req.params.id
+                },
+            });
+            user = await User.findOne({
+                where: {
+                    id:  req.params.id
                 }
             });
             message = 'Update Berhasil';

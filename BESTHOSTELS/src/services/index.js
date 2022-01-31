@@ -5,20 +5,29 @@ import Put from './Put';
 import Delete from './Delete';
 
 // GET
-const product = (token) => Get('product',false);
+const product = () => Get('product',false);
+const position = () => Get('position', false);
 
 //POST
-const staffslist =(data,token) => Post('/api/close/admin/staffs/list', false, data, token)
+const login =(data) => Post('user/login', false, data);
+const signUp =(data) => Post('user', false, data);
+const addPosition =(data) => Post('position', false, data);
 // PUT
 const customerEdit = (data, token) => Put(`/api/close/admin/customers/${data.id}`, false, data, token);
-
+const updatePosition = (data, id) => Put('position/' + id, false, data);
 // DELETE
-const customerDelete = (id, token) => Delete(`/api/close/admin/customers/${id}`, false, token);
+const customerDelete = (id) => Delete(`/api/close/admin/customers/${id}`, false, token);
+const deletePosition= (id) =>  Put('position/delete/' + id, false);
 const API = {
       product,
       customerEdit,
       customerDelete,
-      staffslist,
+      login,
+      position,
+      signUp,
+      addPosition, 
+      updatePosition, 
+      deletePosition
 }
 
 export default API;
