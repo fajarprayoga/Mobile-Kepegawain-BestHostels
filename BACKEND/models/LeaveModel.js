@@ -30,6 +30,6 @@ const Leave = db.define('leave',
         freezeTableName : true //ini agar anam db sama dengan nama ini 
     }
 );
-// Leave.belongsTo(User);
+Leave.belongsTo(User);
 
 export default Leave;

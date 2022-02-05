@@ -12,7 +12,10 @@ export const getAllLeave = async(req, res) => {
         const leave = await Leave.findAll({
             include:User
         });
-        res.json(leave);
+        res.json({
+            code : 200,
+            leave : leave
+        });
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {
         res.json({massage : error.message})
@@ -42,8 +45,12 @@ export const createLeave = async(req, res) => {
     try {
         // req.body.createdAt = nDate;
         await Leave.create(req.body);
+        const leave = await Leave.findAll({
+            include:User
+        });
         res.json({
-            'message' : 'Leave created'
+            'message' : 'Leave created',
+            'leave' : leave
         });
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {

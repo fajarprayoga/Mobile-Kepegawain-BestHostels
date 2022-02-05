@@ -6,6 +6,9 @@ import Home from '../pages/Home';
 import Master from '../pages/Master';
 import Position from '../pages/Position';
 import PositionEdit from '../pages/Position/edit';
+import Leave from '../pages/Leave';
+import DetailLeave from '../pages/Leave/detail';
+import Salary from '../pages/Salary';
 
 const Stack = createStackNavigator();
 const Router = () =>{
@@ -17,18 +20,8 @@ const Router = () =>{
                 options={{headerShown:false}}
             />
             <Stack.Screen
-                name="Signup"
-                component={Signup}
-                options={{headerShown:false}}
-            />
-            <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{headerShown:false}}
-            />
-              <Stack.Screen
-                name="Master"
-                component={Master}
                 options={{headerShown:false}}
             />
             <Stack.Screen
@@ -37,8 +30,34 @@ const Router = () =>{
                 options={{headerShown:false}}
             />
             <Stack.Screen
+                name="Signup"
+                component={Signup}
+                options={{headerShown:false}}
+            />
+              <Stack.Screen
+                name="Master"
+                component={Master}
+                options={{headerShown:false}}
+            />
+
+            <Stack.Screen
                 name="PositionEdit"
                 component={PositionEdit}
+                options={{headerShown:false}}
+            />
+            <Stack.Screen
+                name="Leave"
+                component={Leave}
+                options={{headerShown:false}}
+            />
+            <Stack.Screen
+                name="DetailLeave"
+                component={DetailLeave}
+                options={{headerShown:false}}
+            />
+            <Stack.Screen
+                name="Salary"
+                component={Salary}
                 options={{headerShown:false}}
             />
          

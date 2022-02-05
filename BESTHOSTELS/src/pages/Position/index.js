@@ -1,25 +1,23 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { useIsFocused } from '@react-navigation/native';
+import { Button, Card, Input, Modal } from '@ui-kitten/components';
 import React, { useEffect, useState } from 'react';
-import { Box, Footer, Gap, Header, List } from '../../component';
-import { colors } from '../../utils/colors';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { Footer, Gap, Header, List } from '../../component';
+import { SET_LOADING } from '../../redux/action';
 import API from '../../services';
 import { Message, useForm } from '../../utils';
-import { useDispatch } from 'react-redux';
-import { SET_LOADING } from '../../redux/action';
-import { Button, Card, Input, Modal } from '@ui-kitten/components';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { colors } from '../../utils/colors';
 
-import { useIsFocused } from '@react-navigation/native';
 
 
 const Position = ({navigation}) => {
   const isFocused = useIsFocused();
   const dispacth = useDispatch()
   const [visible, setVisible] = React.useState(false);
-  const [visibleEdit, setVisibleEdit] = React.useState(false);
   const [position, setPosition] = useState(null);
-  const [positionEdit, setPositionEdit] = useState({})
   const [tambahPosition, setTambahPosition] = useForm({
     name : ''
   })
@@ -28,15 +26,17 @@ const Position = ({navigation}) => {
   useEffect(() => {
     if(isFocused){
       let mounted = true;
-      dispacth(SET_LOADING(true))
-      API.position().then(res => {
-        console.log('result',res);  
-        setPosition(res);
-      }).catch((err) => {
-        Message('danger', err);
-      }).finally((f) => {
-        dispacth(SET_LOADING(false))
-      })
+      if(mounted){
+        dispacth(SET_LOADING(true))
+        API.position().then(res => {
+          console.log('result',res);  
+          setPosition(res);
+        }).catch((err) => {
+          Message('danger', err);
+        }).finally((f) => {
+          dispacth(SET_LOADING(false))
+        })
+      }
       // console.log('focusedd',isFocused);
     }
     return () => mounted= false;

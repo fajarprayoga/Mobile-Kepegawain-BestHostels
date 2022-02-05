@@ -2,30 +2,27 @@ import { ImageBackground, StyleSheet, View, ScrollView } from 'react-native';
 import React, {useEffect} from 'react';
 import { Box, Footer, Header } from '../../component';
 import { Layout, Text } from '@ui-kitten/components';
-import {faUserTie, faCandyCane, faFileAlt, faUserCog} from '@fortawesome/free-solid-svg-icons';
+import {faUserTie, faCandyCane, faFileAlt, faUserCog, faFileInvoiceDollar} from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { colors } from '../../utils/colors';
 const Home = ({navigation}) => {
 
   const User = useSelector(state => state.USER);
 
-  useEffect(() => {
-    console.log(User);
-  }, [])
   return (
     <View style={{flex:1, backgroundColor : '#ffffff'}} >
         <View style={styles.header}>
             <View style={{flex : 3, justifyContent :'center',paddingHorizontal : 30}} >
-                <View>
+                {/* <View>
                   <Text category='h3' style={{color : '#fdfcdc'}}>{User.username.toUpperCase()}</Text>
                   <Text  style={{color : '#fdfcdc'}}>{User.phone.toLocaleUpperCase()}</Text>
-                </View>
+                </View> */}
             </View>
             <View style={{flex : 3, justifyContent :'center', paddingRight : 10}} >
-                <View>
+                {/* <View>
                   <Text category='h5' style={{color : '#fdfcdc'}}>Bali BestHostels</Text>
                   <Text  style={{color : '#fdfcdc'}}>Selamat Datang</Text>
-                </View>
+                </View> */}
             </View>
         </View>
         <View style={styles.contentGaji}>
@@ -41,13 +38,16 @@ const Home = ({navigation}) => {
                     <Box title='Jabatan'  color='#00afb9' icon ={faUserTie} iconColor='#fdfcdc' onPress= {() => navigation.navigate('Position')} />
                   </View>
                   <View style={styles.subMenu}>
-                    <Box title='Cuti'  color='#0081a7' icon={faCandyCane} iconColor='#fdfcdc'/>
+                    <Box title='Cuti'  color='#0081a7' icon={faCandyCane} iconColor='#fdfcdc'onPress= {() => navigation.navigate('Leave')} />
                   </View>
                   <View style={styles.subMenu}>
                     <Box title='Absen'  color='#656d4a' icon={faFileAlt} iconColor='#fdfcdc'/>
                   </View>
                   <View style={styles.subMenu}>
                     <Box title='Pegawai'  color='#ff9f1c' icon={faUserCog} iconColor='#fdfcdc'/>
+                  </View>
+                  <View style={styles.subMenu}>
+                    <Box title='Gaji'  color='#57cc99' icon={faFileInvoiceDollar} iconColor='#fdfcdc' onPress= {() => navigation.navigate('Salary')}/>
                   </View>
               </View>
             </ScrollView>

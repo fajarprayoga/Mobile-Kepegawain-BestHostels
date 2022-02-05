@@ -155,3 +155,6 @@ Content-Type: application/json
 {
     "status" : "approved"
 }
+
+### Salary
+GET http://localhost:5000/salary

@@ -5,6 +5,7 @@ import userRouter from './router/user.js';
 import positionRouter from './router/position.js';
 import absentRouter from './router/absent.js';
 import leaveRouter from './router/leave.js';
+import salaryRouter from './router/salary.js';
 import cors from 'cors';
 
 const app = express();
@@ -35,5 +36,6 @@ app.use('/user', userRouter);
 app.use('/position', positionRouter);
 app.use('/absent', absentRouter);
 app.use('/leave', leaveRouter);
+app.use('/salary', salaryRouter);
 // ini menggunakan function call back, yang mana setakah listen port 5000 gunakan call back "()=>consoloe.log('tesxt anda')"
 app.listen(5000, () => console.log('Server runnning di port 5000'));
