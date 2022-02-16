@@ -22,3 +22,24 @@ export const getAllSalary = async(req, res) => {
 
 }
 
+export const updateSalary = async(req, res) => {
+
+    try {
+        const salary = await User.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({
+            message : 'Salary Updated',
+            salary : salary
+        });
+        console.log(req);
+        // res.send('Welcome node js pertama anda'); 
+    } catch (error) {
+        res.json({massage : error.message})
+        console.log(error);
+    }
+
+}
+

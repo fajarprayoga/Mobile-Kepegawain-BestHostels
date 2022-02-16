@@ -46,8 +46,8 @@ Content-Type: application/json
 
 # tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
 {
-    "username" : "yusmira",
-    "password" : "Yusmira123"
+    "username" : "fajar",
+    "password" : "Cxzdsaewq321"
 }
 
 ###update user
@@ -157,4 +157,13 @@ Content-Type: application/json
 }
 
 ### Salary
-GET http://localhost:5000/salary
+GET http://192.168.1.4:5000/salary
+
+###update salary
+PATCH http://localhost:5000/salary/1
+Content-Type: application/json
+
+# tolong perhatikan penulisan body "title": "produc rupiha", titik 2(:) tidak boleh ada spasi 
+{
+    "salary" : 600000
+}

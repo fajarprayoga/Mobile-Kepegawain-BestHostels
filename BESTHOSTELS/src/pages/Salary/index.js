@@ -19,7 +19,7 @@ const List = (props) => {
           <Text style={{padding : 5, color : colors.dark, borderRadius : 5 }} >{Rupiah(salary.salary)}</Text>
         </View>
         <View>
-          <Button size='small' onPress={() => console.log(salary.salary)} >Detail</Button> 
+          <Button size='small' onPress={props.onPress} >Detail</Button> 
         </View>
     </View>
   )
@@ -61,7 +61,7 @@ const Salary = ({navigation}) => {
             {salary && salary.map((item, index) => {
               return (
                   <View key={index}>
-                    <List salary = {item} />
+                    <List salary = {item} onPress={() => navigation.navigate('DetailSalary', {salary : item})}/>
                     <Gap height={10} />
                   </View>
               )

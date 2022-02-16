@@ -18,6 +18,7 @@ const addLeave = (data) => Post('leave', false, data);
 
 // PATCH
 const editLeave = (data, id) => Patch('leave/'+id, false, data)
+const updateSalary = (data, id) => Patch('salary/' + id, false, data);
 
 // PUT
 const customerEdit = (data, token) => Put(`/api/close/admin/customers/${data.id}`, false, data, token);
@@ -40,7 +41,8 @@ const API = {
       leave,
       addLeave,
       editLeave,
-      salary
+      salary,
+      updateSalary
 }
 
 export default API;

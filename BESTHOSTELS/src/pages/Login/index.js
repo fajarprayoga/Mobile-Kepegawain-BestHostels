@@ -1,12 +1,13 @@
 import { Button, Input, Text } from '@ui-kitten/components';
 import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { useEffect } from 'react';
+import { BackHandler, ImageBackground, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Gap } from '../../component';
 import { SET_LOADING, SET_USER } from '../../redux/action';
 import API from '../../services';
 import { Message, useForm } from '../../utils';
-
+import { StackActions } from '@react-navigation/native';
 
 const Login = ({navigation}) => {
   const stateGlobal = useSelector(state => state.LOADING);
@@ -15,7 +16,6 @@ const Login = ({navigation}) => {
     username : '',
     password : ''
   })
-
   
   const actionLogin = () => {
     console.log('login',login);
@@ -24,15 +24,16 @@ const Login = ({navigation}) => {
         API.login(login).then(res => {
             // console.log(res);
             if(res.code == 200){
-              setLogin('reset');
+              // setLogin('reset');
               dispatch(SET_USER(res.user));
-              navigation.replace('Home');
+              navigation.replace('MainApp');
+              // console.log(navigation);
             }else{
               Message('warning',res.message);
             }
         }).catch(err => {
           Message('danger',err );
-          console.log(err);
+          console.log('error', err);
         }).finally(fin => {
               dispatch(SET_LOADING(false))
         })

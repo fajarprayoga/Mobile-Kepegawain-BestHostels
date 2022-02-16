@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   contentGaji :{ position : 'absolute', top : 210, width : '100%', paddingHorizontal : 20, alignItems : 'center'},
   gaji : {
     width : '98%', 
-    backgroundColor : '#ffffff', 
+    backgroundColor : 'white',  
     height : 60, 
     borderRadius : 5, 
     shadowColor: "#000",
