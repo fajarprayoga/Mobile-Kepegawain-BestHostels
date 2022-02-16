@@ -35,7 +35,7 @@ const Salary = ({navigation}) => {
       if(mounted){
             dispatch(SET_LOADING(true))
             API.salary().then(res => {
-                // console.log(res);
+                console.log(res);
                 setTotalSalary(res.totalSalary)
                 setSalary(res.salary)
             }).catch((err) => {

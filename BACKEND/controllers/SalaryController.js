@@ -8,7 +8,7 @@ function getTotalSalary() {
 export const getAllSalary = async(req, res) => {
     try {
         const salary = await User.findAll(
-            {attributes: ['username', 'fullname', 'salary']}
+            {attributes: ['id','username', 'fullname', 'salary']}
         );
         const totalSalary = await getTotalSalary();
         res.json({
@@ -25,16 +25,16 @@ export const getAllSalary = async(req, res) => {
 export const updateSalary = async(req, res) => {
 
     try {
-        const salary = await User.update(req.body, {
+        const salary = await User.update({salary : parseInt(req.body.salary)}, {
             where: {
                 id: req.params.id
             }
         });
         res.json({
             message : 'Salary Updated',
-            salary : salary
+            // salary : salary
         });
-        console.log(req);
+        console.log(req.body);
         // res.send('Welcome node js pertama anda'); 
     } catch (error) {
         res.json({massage : error.message})
